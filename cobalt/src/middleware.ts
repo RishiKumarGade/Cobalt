@@ -35,6 +35,7 @@ export const config = {
     '/resetpassword',
     '/otherlogins',
     '/guide',
-    '/mysnippets'
+    '/mysnippets',
+    '/test',
   ]
 }

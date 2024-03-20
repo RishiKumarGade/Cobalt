@@ -5,6 +5,7 @@ import { useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import NavBar from "@/components/NavBar";
 
+
 export default function Home() {
   useEffect(() => {
     // Your useEffect logic here for any JavaScript animations or functionality

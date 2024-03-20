@@ -19,7 +19,7 @@ function Page() {
         console.log(res.data.snippets);
         setSnippets(res.data.snippets);
       });
-    } catch (error) { }
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function Page() {
           setFilteredSnippets(null);
         }
       });
-    } catch (error) { }
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -102,9 +102,7 @@ function Page() {
           <>
             {filteredSnippets?.length > 0 ? (
               <div className="flex flex-col justify-center mx-40 gap-7 overflow-y-auto mb-7">
-                <p className="text-[#b5daff] text-lg">
-                filtered
-                </p>
+                <p className="text-[#b5daff] text-lg">filtered</p>
                 {filteredSnippets &&
                   filteredSnippets.map((snippet) => {
                     if (selectedSnippet == snippet) {
@@ -135,7 +133,7 @@ function Page() {
                                 snippet.tags.map((tag) => {
                                   return (
                                     <li
-                                      className="inline mr-2 bg-[#40506a] text-center px-3 py-1 rounded-md border text-[#b5daff]"
+                                      className="inline mr-2 bg-[#f5721690] text-center px-3 py-1 rounded-md border text-white"
                                       key={tag}
                                     >
                                       {tag}
@@ -154,15 +152,18 @@ function Page() {
                     } else {
                       return (
                         <div
-                          className="bg-[#264F9460] border pl-4 pt-4 flex flex-col gap-2"
+                          className="bg-[#264F9460] border pl-4 pt-4 flex hover:bg-[#4e78c180] flex-col gap-2"
                           onClick={() => {
                             setSelectedSnippet(snippet);
                           }}
                           key={snippet._id}
                         >
-                          <p className="text-xl font-mono"> {snippet.title.toUpperCase()} </p>
-                          <p className="text-[#b5daff]"> 
-                            {" "} 
+                          <p className="text-xl font-mono">
+                            {" "}
+                            {snippet.title.toUpperCase()}{" "}
+                          </p>
+                          <p className="text-[#b5daff]">
+                            {" "}
                             {snippet.description}{" "}
                           </p>
 
@@ -219,7 +220,7 @@ function Page() {
                                 snippet.tags.map((tag) => {
                                   return (
                                     <li
-                                      className="inline mr-2 bg-[#40506a] text-center px-3 py-1 rounded-md border text-[#b5daff]"
+                                      className="inline mr-2 bg-[#f5721690] text-center px-3 py-1 rounded-md border text-white"
                                       key={tag}
                                     >
                                       {tag}
@@ -238,24 +239,27 @@ function Page() {
                     } else {
                       return (
                         <div
-                          className="bg-[#4a5367] rounded-md p-4 flex flex-col gap-2 text-slate-900 hover:border"
+                          className="bg-[#264F9460] border pl-4 pt-4 flex flex-col hover:bg-[#4e78c180] gap-2"
                           onClick={() => {
                             setSelectedSnippet(snippet);
                           }}
                           key={snippet._id}
                         >
-                          <p className="text-xl"> {snippet.title} </p>
-                          <p className="text-slate-800">
+                          <p className="text-xl font-mono">
+                            {" "}
+                            {snippet.title.toUpperCase()}{" "}
+                          </p>
+                          <p className="text-[#b5daff]">
                             {" "}
                             {snippet.description}{" "}
                           </p>
 
-                          <ol>
+                          <ol className="mb-5">
                             {snippet.tags &&
                               snippet.tags.map((tag) => {
                                 return (
                                   <li
-                                    className="inline mr-2 bg-[#556986] text-center px-3 py-1 rounded-md border text-[#b5daff]"
+                                    className="inline mr-2 bg-[#f5721690] text-center px-3 py-1 rounded-md border text-[#ffffff]"
                                     key={tag}
                                   >
                                     {tag}

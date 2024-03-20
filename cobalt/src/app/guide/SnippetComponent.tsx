@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-export default function SnippetComponent({ code,getHubLink }) {
+export default function SnippetComponent({ code, getHubLink }) {
   const router = useRouter();
 
   useEffect(() => {
     if (code) {
-      setSnippetData({ ...snippetData, code: code,src:getHubLink });
+      setSnippetData({ ...snippetData, code: code, src: getHubLink });
     }
   }, []);
 
@@ -19,7 +19,7 @@ export default function SnippetComponent({ code,getHubLink }) {
     description: "",
     code: "",
     tags: [],
-    src:getHubLink
+    src: getHubLink,
   });
 
   // useEffect(()=>{
@@ -67,17 +67,15 @@ export default function SnippetComponent({ code,getHubLink }) {
           router.push("/login");
           return;
         }
-        setSnippetData(
-          {
-            title: "",
-            description: "",
-            code: "",
-            tags: [],
-          }
-        )
+        setSnippetData({
+          title: "",
+          description: "",
+          code: "",
+          tags: [],
+        });
         toast.success("Successfully Saved!");
       });
-      
+
       console.log("Sending data to MongoDB:", snippetData);
     } catch (error) {
       console.error("Error storing data in MongoDB:", error);
@@ -89,8 +87,7 @@ export default function SnippetComponent({ code,getHubLink }) {
       <h1 className="text-xl mt-10 font-mono text-center">Save Code Snippet</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <h1>RepoLink</h1>
-          <label htmlFor="title" className="mr-4">
+          <label htmlFor="title" className="mr-4 text-[#b5daff]">
             Title:{" "}
           </label>
           <Input
@@ -102,12 +99,9 @@ export default function SnippetComponent({ code,getHubLink }) {
             id="title"
             name="title"
           ></Input>
-          <Button variant="snipbutton" className="w-24 my-4 ml-10" type="submit">
-          Add Snippet
-        </Button>
         </div>
-        <div className="py-2">
-          <label htmlFor="code" className="mb-3">
+        <div className="py-2 flex">
+          <label htmlFor="code" className="my-3 text-[#b5daff] mr-4">
             Add the code snippet:{" "}
           </label>
           <textarea
@@ -120,7 +114,7 @@ export default function SnippetComponent({ code,getHubLink }) {
           ></textarea>
         </div>
         <div className="flex gap-4">
-          <label htmlFor="description">Description: </label>
+          <label htmlFor="description" className="text-[#b5daff]">Description: </label>
           <textarea
             placeholder="What is the snippet about"
             className="px-4 py-1 min-h-[100px] min-w-[300px] bg-[#1e293b] rounded-md text-[#c4cede] focus:outline-none focus:ring focus:ring-opacity-60"
@@ -148,16 +142,28 @@ export default function SnippetComponent({ code,getHubLink }) {
               <ul className="mt-5 ml-2 mb-5">
                 {}
                 {snippetData.tags.map((item, index) => (
-                  <li className="inline mr-2 bg-[#40506a] text-center px-3 py-1 rounded-md border text-[#b5daff]" key={index}>{item}</li>
+                  <li
+                    className="inline mr-2 bg-[#40506a] text-center px-3 py-1 rounded-md border text-[#b5daff]"
+                    key={index}
+                  >
+                    {item}
+                  </li>
                 ))}
               </ul>
             ) : (
               <p>empty</p>
             )}
           </div>
+          <div className="flex justify-center">
+            <Button
+              variant="anibutton"
+              className="w-30 my-4 ml-10"
+              type="submit"
+            >
+              <span className="z-50">Add Snippet</span>
+            </Button>
+          </div>
         </div>
-    
-        
       </form>
     </div>
   );

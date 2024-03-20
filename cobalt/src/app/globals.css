@@ -76,6 +76,7 @@
 } */
 .spacebg{
   background-image: url(../Images/nice.jpg);
+  /* background-color: #0F1927; */
   background-repeat: no-repeat;
     background-size: cover; 
     background-position: center;

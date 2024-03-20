@@ -1,4 +1,11 @@
 "use client";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+
 import NavBar from "@/components/NavBar";
 import { Button } from "@/components/ui/button";
 import fetchDirectoryContents from "@/helpers/github/gitApi";
@@ -274,16 +281,19 @@ function Page() {
           }
           if (type == "EXPLAINCODE") {
             Object.keys(data).forEach((key) => {
-              if(key == selectedFile)
+              if(key == selectedFile){
+
               setExplainations({ ...explainations, [key]: res.data.message });
+              }
             });
             setExpLoading(false);
           }
 
           if (type == "OPTIMIZECODE") {
             Object.keys(data).forEach((key) => {
-              if(key == selectedFile)
+              if(key == selectedFile){
               setOptimizations({ ...optimizations, [key]: res.data.message });
+              }
             });
             setOptLoading(false);
           }
@@ -318,7 +328,7 @@ function Page() {
   return (
     <>
       <div className="h-screen flex flex-col">
-        <NavBar />
+       <NavBar />
         <div>
           <input
             type="text"
@@ -361,8 +371,10 @@ function Page() {
             </>
           )}
         </div>
-        <div className="h-full flex">
-          <div className="bg-[#264F9460] w-[250px] h-full border">
+        {/* check */}
+        <ResizablePanelGroup className="h-full flex" direction={"horizontal"}>
+          <ResizablePanel defaultSize={15} maxSize={15} className="bg-[#264F9460]  h-full border">
+            <div className="overflow-y-auto">
             <div className="text-right w-full p-2">
               <button className="w-7 h-7 rounded-full bg-white">&gt;</button>{" "}
             </div>
@@ -393,10 +405,12 @@ function Page() {
                   </button>
                 );
               })}
-          </div>
-          <div className="flex w-[100%]">
-            <div className="bg-[#264F9460] w-[50%] h-full  text-white  overflow-y-auto custom-scrollbar border">
-              {data &&
+              </div>
+          </ResizablePanel>
+          <ResizableHandle />
+          <ResizablePanel minSize={30}>
+          <div className="bg-[#264F9460] h-full  text-white ">
+          {data &&
                 Object.keys(data).map((key) => {
                   if (key == selectedFile)
                     return (
@@ -406,13 +420,15 @@ function Page() {
                         autoComplete="off"
                         value={data[selectedFile]}
                         language={selectedFile.split(".")[1]}
-                        className="w-[100%] h-[100%]  border backdrop-blur-xl border-black rounded-md"
+                        
+                        className="w-[100%] h-[100%] border backdrop-blur-xl overflow-y-scroll border-black rounded-md"
                         spellCheck={false}
                         onMouseUp={handleSelection}
                         onMouseDown={() => {
                           setSelectedText(null);
                         }}
                         key={key}
+                        style={{overflow: 'scroll'}}
                       >
                         {" "}
                         {data[key]}{" "}
@@ -447,8 +463,11 @@ function Page() {
                 </div>
               )}
             </div>
-            <div className="bg-[#264F9460] w-[50%] h-full text-white overflow-y-auto custom-scrollbar border">
-              <ul className="flex text-center gap-1 p-1">
+          </ResizablePanel>
+          <ResizableHandle />
+          <ResizablePanel minSize={30}>
+          <div className="bg-[#264F9460] h-full text-white overflow-y-auto custom-scrollbar border">
+          <ul className="flex text-center gap-1 p-1">
                 <li
                   onClick={() => {
                     setSideBox("EXPLAIN");
@@ -482,7 +501,8 @@ function Page() {
                   optimization
                 </li>
               </ul>
-              <div>
+            <hr />
+            <div>
                 {sideBox == "EXPLAIN" && (
                   <>
                     {expLoading ? (
@@ -567,10 +587,9 @@ function Page() {
                   </>
                 )}
               </div>
-              <hr />
-            </div>
-          </div>
-        </div>
+              </div>
+          </ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </>
   );
@@ -578,35 +597,3 @@ function Page() {
 
 export default Page;
 
-{
-  /* <div className="h-screen flex flex-col">
-        <div>
-          <input type="text" placeholder="enter repo link" />
-          <button className="bg-slate-300">getrepo</button>
-        </div>
-        <div className="h-full flex">
-          <div className="bg-[#264F9460] w-[250px] h-full border">
-            <div className="text-right w-full p-2"><button className="w-7 h-7 rounded-full bg-white">&gt;</button> </div>
-          </div>
-          <div className="flex w-[100%]">
-            <div className="bg-[#264F9460] w-[50%] h-full  text-white overflow-y-auto custom-scrollbar border">
-              <CodeEditor
-                autoFocus
-                autoComplete="off"
-                language="js"
-                className="w-[100%] h-[100%] bg-  border backdrop-blur-xl border-black rounded-md"
-              />
-            </div>
-            <div className="bg-[#264F9460] w-[50%] h-full text-white overflow-y-auto custom-scrollbar border">
-              <ul className="flex text-center gap-1 p-1">
-                <li className="bg-slate-500 w-[25%] rounded-md p-2">Explanation</li>
-                <li className="bg-slate-500  w-[25%]  p-2">Snippet</li>
-                <li className="bg-slate-500 w-[25%] p-2">components</li>
-                <li className="bg-slate-500 w-[25%] p-2">optimization</li>
-              </ul>
-              <hr />
-            </div>
-          </div>
-        </div>
-      </div> */
-}
