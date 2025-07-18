@@ -5,9 +5,6 @@
 
 * <p>Additionally, developers frequently need to reuse code snippets across different projects. To support this, we've created a secure snippet storage system. Our machine learning algorithm allows you to search for specific code snippets using titles, descriptions, and tags, ensuring you can quickly find and reuse the code you need, enhancing productivity and efficiency.</p>
 
-<h2>🚀 Demo</h2>
-
-[https://wkjkj5w7-3000.inc1.devtunnels.ms/](https://wkjkj5w7-3000.inc1.devtunnels.ms/)
 
   
   
